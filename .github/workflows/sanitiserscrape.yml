@@ -1,33 +1,44 @@
-# This is a basic workflow to help you get started with Actions
-
 name: sanitiserscrape
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+  schedule:
+    - cron: '* 16 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
+  # Scraping job
+  autoscrape:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
+    # Load repo and install R
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@master
+    - uses: r-lib/actions/setup-r@master
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-
-    # Runs a set of commands using the runners shell
-    - name: Run a multi-line script
+    # Set-up R
+    - name: Install pacakges
       run: |
-        echo Add other actions to build,
-        echo test, and deploy your project.
+        R -e 'install.packages("magrittr")'
+        R -e 'install.packages("polite")'
+        R -e 'install.packages("rvest")'
+        R -e 'install.packages("dplyr")'
+        R -e 'install.packages("stringr")'
+        R -e 'install.packages("tidyr")'
+        R -e 'install.packages("readr")'
+        R -e 'install.packages("ggplot2")'
+    # Run R script
+    - name: Scrape
+      run: Rscript scrape_data.R
+    
+    # Add new files in data folder, commit along with other modified files, push
+    - name: Commit files
+      run: |
+        git config --local user.name github-actions
+        git config --local user.email "actions@github.com"
+        git add data/*
+        git commit -am "GH ACTION data upload $(date)"
+        git push origin master
+        
