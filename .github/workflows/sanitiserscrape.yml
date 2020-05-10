@@ -4,7 +4,7 @@ name: sanitiserscrape
 # events but only for the master branch
 on:
   schedule:
-    - cron: '* 16 * * *'
+    - cron: '0 16 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
