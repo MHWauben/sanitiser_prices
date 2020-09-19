@@ -28,6 +28,7 @@ jobs:
         R -e 'install.packages("tidyr")'
         R -e 'install.packages("readr")'
         R -e 'install.packages("ggplot2")'
+        R -e 'install.packages("usethis")'
         R -e 'install.packages("polite")'
     # Run R script
     - name: Scrape
