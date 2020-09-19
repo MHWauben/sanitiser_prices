@@ -22,13 +22,13 @@ jobs:
     - name: Install pacakges
       run: |
         R -e 'install.packages("magrittr")'
-        R -e 'install.packages("polite")'
         R -e 'install.packages("rvest")'
         R -e 'install.packages("dplyr")'
         R -e 'install.packages("stringr")'
         R -e 'install.packages("tidyr")'
         R -e 'install.packages("readr")'
         R -e 'install.packages("ggplot2")'
+        R -e 'install.packages("polite")'
     # Run R script
     - name: Scrape
       run: Rscript scrape_data.R
