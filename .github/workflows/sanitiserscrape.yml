@@ -28,7 +28,7 @@ jobs:
         R -e 'install.packages("tidyr")'
         R -e 'install.packages("readr")'
         R -e 'install.packages("ggplot2")'
-        R -e 'install.packages("usethis")'
+        R -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/usethis/usethis_1.6.1.tar.gz", repos = NULL, type = "source")'
         R -e 'install.packages("polite")'
     # Run R script
     - name: Scrape
