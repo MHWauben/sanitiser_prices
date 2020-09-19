@@ -1,11 +1,11 @@
 library(magrittr)
-library(polite)
 library(rvest)
 library(dplyr)
 library(stringr)
 library(readr)
 library(tidyr)
 library(ggplot2)
+library(polite)
 
 sanitiser_url <- paste0('https://www.amazon.co.uk/s?k=hand+sanitiser&i=drugstore&rh=n%3A65801031%2Cn%3A2826561031&dc&page=', 
                         seq(1, 25), '&qid=1583507458&rnid=1642204031&ref=sr_pg_2')
